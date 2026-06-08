@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livret CSO Complémentaire 4,5t – SDIS 38</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f5f5f5; color: #111; min-height: 100vh; overscroll-behavior-y: none; }
+
+/* HEADER */
+.header {
+  background: #cc0000; border-bottom: 3px solid #990000;
+  padding: 12px 18px; display: flex; align-items: center; gap: 14px;
+  position: sticky; top: 0; z-index: 200;
+}
+.logo {
+  background: white; color: #cc0000; font-weight: bold; font-size: 11px;
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; flex-shrink: 0;
+}
+.header-title { font-size: 17px; font-weight: bold; color: #fff; }
+.header-sub { font-size: 11px; color: rgba(255,255,255,.75); }
+.badge { margin-left: auto; background: #7b0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+.badge.valid   { background: #2e7d32; }
+.badge.ajourne { background: #e65100; }
+
+/* TABS */
+.tabs { display: flex; background: #fff; border-bottom: 2px solid #ddd; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  padding: 11px 14px; font-size: 12px; font-weight: bold; color: #888;
+  background: none; border: none; border-bottom: 3px solid transparent;
+  cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s;
+}
+.tab-btn:hover { color: #111; background: #f0f0f0; }
+.tab-btn.active { color: #cc0000; border-bottom-color: #cc0000; background: #fafafa; }
+
+/* SECTIONS */
+.section { display: none; padding: 20px 16px; max-width: 980px; margin: 0 auto; }
+.section.active { display: block; animation: fi .3s ease; }
+@keyframes fi { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* CARD */
+.card { background: #fff; border-radius: 10px; border: 1px solid #ddd; padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+.card-title {
+  font-size: 13px; font-weight: bold; color: #cc0000; letter-spacing: 1px;
+  text-transform: uppercase; padding-bottom: 10px; border-bottom: 1px solid #eee;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.card-title::before { content:''; width:4px; height:16px; background:#cc0000; border-radius:2px; flex-shrink:0; }
+
+/* FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 10px; font-weight: bold; letter-spacing: 1.2px; text-transform: uppercase; color: #666; }
+input[type="text"], input[type="date"], textarea {
+  background: #fafafa; border: 1px solid #ccc; border-radius: 7px;
+  padding: 8px 11px; color: #111; font-size: 13px;
+  font-family: Arial, sans-serif; outline: none; width: 100%;
+}
+input:focus, textarea:focus { border-color: #cc0000; background: #fff; }
+textarea { resize: vertical; min-height: 70px; }
+
+/* Photo apprenant */
+.photo-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:10px; }
+.photo-preview {
+  width:120px; height:150px; border-radius:10px; object-fit:cover;
+  border:2px dashed #bbb; background:#f5f5f5; display:flex; align-items:center;
+  justify-content:center; color:#666; font-size:32px; cursor:pointer;
+  overflow:hidden; position:relative;
+}
+.photo-preview img { width:100%; height:100%; object-fit:cover; border-radius:8px; }
+.photo-btns { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.photo-btn {
+  font-size:11px; padding:5px 12px; border-radius:16px;
+  border:1px solid #bbb; background:#f0f0f0; color:#555;
+  cursor:pointer; transition:background .15s;
+}
+.photo-btn:hover { background:#e0e0e0; }
+.photo-btn.danger { border-color:#e53935; color:#e53935; }
+
+/* DAY HEADER */
+.day-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  padding: 10px 14px; background: #fff3f3; border-radius: 8px; border-left: 4px solid #cc0000;
+}
+.day-header-title { font-weight: bold; font-size: 14px; color: #111; }
+
+/* LEGEND */
+.legend {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;
+  padding: 9px 14px; background: #f8f8f8; border-radius: 8px; border: 1px solid #ddd;
+}
+.li { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #555; }
+
+/* EVAL TABLE */
+.eval-table { width: 100%; border-collapse: collapse; }
+.eval-table th {
+  padding: 9px 8px; font-size: 11px; letter-spacing: 1px;
+  text-transform: uppercase; font-weight: bold; border-bottom: 2px solid #ddd;
+}
+.th-comp { text-align:left; color:#666; }
+.th-stag { color:#1565c0; text-align:center; }
+.th-form { color:#e65100; text-align:center; }
+.th-nr   { color:#888; text-align:center; width:7%; }
+
+.eval-table td { padding:7px 5px; border-bottom:1px solid #f0f0f0; vertical-align:middle; }
+.eval-table tr:hover td { background:#fafafa; }
+.eval-table tr:last-child td { border-bottom:none; }
+.eval-table tr.cat-row td {
+  font-size:11px; font-weight:bold; letter-spacing:1.5px; text-transform:uppercase;
+  padding:10px 6px 4px; border-bottom:1px solid #ddd; background:#f5f5f5;
+}
+.comp-name { font-size:13px; font-weight:600; color:#111; }
+.comp-sub  { font-size:11px; color:#777; }
+
+/* PASTILLES COULEUR */
+.smiley-cell { text-align:center; vertical-align:middle; }
+.smileys { display:flex; justify-content:center; gap:4px; }
+
+.sb {
+  width:26px; height:26px; border-radius:6px;
+  border:2px solid #ccc; background:#f0f0f0;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:0; transition:transform .12s, background .15s, border-color .15s, box-shadow .15s;
+  flex-shrink:0;
+}
+.sb:hover { transform:scale(1.18); filter:brightness(.92); }
+
+.smileys .sb:nth-child(1)::after { content:''; display:block; width:8px; height:8px; border-radius:2px; background:#aaa; }
+.smileys .sb:nth-child(2)::after { content:''; display:block; width:8px; height:8px; border-radius:2px; background:rgba(229,57,53,.5); }
+.smileys .sb:nth-child(3)::after { content:''; display:block; width:8px; height:8px; border-radius:2px; background:rgba(251,140,0,.5); }
+.smileys .sb:nth-child(4)::after { content:''; display:block; width:8px; height:8px; border-radius:2px; background:rgba(67,160,71,.5); }
+
+.sb.s1 { background:#333; border-color:#111; box-shadow:0 0 6px rgba(0,0,0,.4); }
+.sb.s1::after { display:none; }
+.sb.s2 { background:#e53935; border-color:#c62828; box-shadow:0 0 8px rgba(229,57,53,.5); }
+.sb.s2::after { display:none; }
+.sb.s3 { background:#fb8c00; border-color:#e65100; box-shadow:0 0 8px rgba(251,140,0,.5); }
+.sb.s3::after { display:none; }
+.sb.s4 { background:#43a047; border-color:#2e7d32; box-shadow:0 0 8px rgba(67,160,71,.5); }
+.sb.s4::after { display:none; }
+
+.sb-auto {
+  width:26px; height:26px; border-radius:6px;
+  border:2px solid #ccc; background:#f0f0f0; font-size:0;
+  display:flex; align-items:center; justify-content:center;
+  cursor:default; flex-shrink:0;
+}
+.sb-auto.s1 { background:#333; border-color:#111; }
+.sb-auto.s2 { background:#e53935; border-color:#c62828; }
+.sb-auto.s3 { background:#fb8c00; border-color:#e65100; }
+.sb-auto.s4 { background:#43a047; border-color:#2e7d32; }
+
+.nr-cell { text-align:center; }
+.nr-btn {
+  font-size:9px; font-weight:bold; color:#888; background:#f0f0f0;
+  border:1px dashed #bbb; border-radius:5px; padding:3px 6px; cursor:pointer; transition:all .15s;
+}
+.nr-btn:hover { background:#ddd; color:#111; border-color:#666; }
+.nr-btn.active { background:#e53935; color:#fff; border-color:#c62828; border-style:solid; }
+
+/* BILAN */
+.stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:18px; }
+.stat-box { background:#fff; border-radius:10px; padding:15px; text-align:center; border:1px solid #ddd; box-shadow:0 1px 4px rgba(0,0,0,.05); }
+.stat-num { font-size:30px; font-weight:bold; line-height:1; margin-bottom:3px; color:#111; }
+.stat-lbl { font-size:10px; color:#888; text-transform:uppercase; letter-spacing:1px; }
+
+/* JURY */
+.jury-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px; }
+.jury-opt {
+  padding:14px; border-radius:10px; border:2px solid #ddd; background:#fafafa;
+  cursor:pointer; text-align:center; transition:all .2s;
+}
+.jury-opt:hover { transform:translateY(-2px); border-color:#aaa; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+.jury-opt.sel-v  { border-color:#43a047; background:#e8f5e9; }
+.jury-opt.sel-a1 { border-color:#fb8c00; background:#fff3e0; }
+.jury-opt.sel-a2 { border-color:#e53935; background:#ffebee; }
+.jury-icon  { font-size:24px; margin-bottom:6px; }
+.jury-label { font-size:13px; font-weight:bold; color:#111; }
+.jury-desc  { font-size:11px; color:#777; margin-top:4px; }
+
+/* VISAS */
+.visa-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.visa-box  { background:#fafafa; border-radius:10px; border:1px solid #ddd; padding:14px; text-align:center; }
+.visa-title{ font-size:10px; font-weight:bold; letter-spacing:1px; text-transform:uppercase; color:#666; margin-bottom:10px; }
+.sig-wrap  { position:relative; margin-bottom:6px; }
+.sig-canvas{ display:block; width:100%; height:90px; border:1.5px dashed #bbb; border-radius:8px;
+             background:#fff; cursor:crosshair; touch-action:none; }
+.sig-canvas.signed { border-color:#43a047; border-style:solid; }
+.sig-actions{ display:flex; justify-content:center; gap:8px; margin-top:5px; }
+.sig-btn   { font-size:10px; padding:3px 10px; border-radius:12px; border:1px solid #ccc;
+             background:#fff; cursor:pointer; color:#555; transition:background .15s; }
+.sig-btn:hover { background:#eee; }
+.sig-btn.clear { border-color:#e53935; color:#e53935; }
+.sig-placeholder { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+                   font-size:11px; color:#bbb; pointer-events:none; user-select:none; }
+
+/* BTNS */
+.btn-row { display:flex; gap:10px; justify-content:flex-end; margin-top:18px; flex-wrap:wrap; }
+.btn { padding:10px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; border:none; transition:all .2s; }
+.btn-primary   { background:#cc0000; color:white; }
+.btn-primary:hover   { background:#990000; transform:translateY(-1px); }
+.btn-secondary { background:#f0f0f0; color:#333; border:1px solid #ccc; }
+.btn-secondary:hover { border-color:#888; background:#e5e5e5; }
+.btn-warn      { background:#fff; color:#cc0000; border:1px solid #cc0000; }
+.btn-warn:hover { background:#ffebee; }
+
+/* SEPARATEUR */
+.section-divider { display:flex; align-items:center; gap:12px; margin:28px 0 20px; }
+.section-divider-line  { flex:1; height:2px; background:#ddd; }
+.section-divider-label {
+  font-size:13px; font-weight:bold; letter-spacing:2px; text-transform:uppercase;
+  color:#cc0000; padding:6px 16px; background:#fff;
+  border:1px solid #cc0000; border-radius:20px;
+}
+
+/* DIAG GRISE */
+.diag-footer {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  padding-top:14px; border-top:1px solid #ddd; margin-top:14px;
+}
+.diag-grise-num { font-size:38px; font-weight:bold; color:#cc0000; }
+.global-bar-bg  { background:#eee; border-radius:8px; height:12px; overflow:hidden; }
+.global-bar-fill{ height:100%; border-radius:8px; transition:width .5s, background .5s; }
+
+/* PROBLEM */
+.problem-item {
+  background:#fff5f5; border:1px solid #ffcdd2; border-left:4px solid #e53935;
+  border-radius:8px; padding:12px 14px; margin-bottom:10px;
+}
+.problem-name { font-size:13px; font-weight:bold; color:#c62828; margin-bottom:6px; }
+.ok-item {
+  display:inline-flex; align-items:center; gap:6px;
+  background:#e8f5e9; border:1px solid #a5d6a7; border-radius:20px;
+  padding:5px 12px; font-size:12px; color:#2e7d32; margin:4px;
+}
+
+/* PARCOURS CONDUITE */
+.parcours-table { width:100%; border-collapse:collapse; margin-top:10px; }
+.parcours-table th { padding:9px 12px; font-size:11px; letter-spacing:1px; text-transform:uppercase; font-weight:bold; border-bottom:2px solid #ddd; text-align:left; color:#666; }
+.parcours-table td { padding:8px 12px; border-bottom:1px solid #f0f0f0; vertical-align:middle; font-size:13px; }
+.parcours-table tr:hover td { background:#fafafa; }
+.parcours-type-badge {
+  display:inline-block; font-size:10px; font-weight:bold; padding:2px 8px; border-radius:10px; margin-right:4px;
+  letter-spacing:.5px; text-transform:uppercase;
+}
+.badge-conduite { background:rgba(21,101,192,.12); color:#1565c0; border:1px solid rgba(21,101,192,.3); }
+.badge-guidage  { background:rgba(230,81,0,.12);   color:#e65100; border:1px solid rgba(230,81,0,.3); }
+.badge-valid    { background:rgba(67,160,71,.12);  color:#2e7d32; border:1px solid rgba(67,160,71,.3); }
+
+/* ADAPTATION ENGIN */
+.engin-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:10px; }
+.engin-box {
+  border:2px solid #ddd; border-radius:10px; padding:14px; text-align:center;
+  cursor:pointer; transition:all .2s; background:#fafafa;
+}
+.engin-box:hover { border-color:#aaa; }
+.engin-box.active { border-color:#43a047; background:#e8f5e9; }
+.engin-label { font-size:13px; font-weight:bold; color:#111; margin-top:6px; }
+.engin-icon  { font-size:22px; }
+
+/* BOUTON HEADER */
+.btn-save-hdr {
+  margin-left:10px;background:rgba(255,255,255,.2);color:white;
+  border:2px solid rgba(255,255,255,.5);border-radius:20px;
+  padding:6px 14px;font-size:12px;font-weight:bold;cursor:pointer;
+  display:flex;align-items:center;gap:6px;transition:background .2s;flex-shrink:0;
+}
+.btn-save-hdr:hover{background:rgba(255,255,255,.35);}
+.save-pulse{animation:pulse-save .6s ease;}
+@keyframes pulse-save{0%{transform:scale(1);}50%{transform:scale(1.12);}100%{transform:scale(1);}}
+
+/* MODAL */
+.modal-overlay {
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);
+  z-index:1000;align-items:center;justify-content:center;
+}
+.modal-overlay.open{display:flex;}
+.modal-box {
+  background:#fff;border:1px solid #ddd;border-radius:14px;
+  padding:24px;width:460px;max-width:95vw;max-height:90vh;overflow-y:auto;
+  box-shadow:0 8px 32px rgba(0,0,0,.18);
+}
+.modal-title {
+  font-size:15px;font-weight:bold;color:#cc0000;
+  margin-bottom:18px;display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid #eee;padding-bottom:12px;
+}
+.modal-close { margin-left:auto;background:none;border:none;color:#aaa;font-size:20px;cursor:pointer;padding:0 4px;line-height:1; }
+.modal-close:hover{color:#333;}
+.mblock { background:#f8f8f8;border:1px solid #e5e5e5;border-radius:10px;padding:14px;margin-bottom:12px; }
+.mblock-title { font-size:11px;font-weight:bold;letter-spacing:1.2px;text-transform:uppercase;color:#888;margin-bottom:10px; }
+.minput { background:#fff;border:1px solid #ccc;border-radius:7px;padding:8px 11px;color:#111;font-size:13px;font-family:Arial,sans-serif;outline:none;width:100%;margin-bottom:8px; }
+.minput:focus{border-color:#cc0000;}
+.mbtn { width:100%;padding:10px 14px;border:none;border-radius:8px;color:white;font-size:13px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;transition:filter .15s; }
+.mbtn:hover{filter:brightness(1.1);}
+.mbtn-onedrive{background:#0078d4;}
+.mbtn-loc{background:#2e7d32;}
+.mbtn-load{background:#555;}
+.mbtn-del{background:#c62828;}
+
+.save-list{max-height:220px;overflow-y:auto;margin-top:8px;}
+.save-item { display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;background:#fff;margin-bottom:6px;cursor:pointer;border:1px solid #e5e5e5;transition:border-color .15s,background .15s; }
+.save-item:hover{background:#f0f0f0;border-color:#bbb;}
+.save-item-info{flex:1;}
+.save-item-name{font-size:13px;font-weight:bold;color:#111;}
+.save-item-date{font-size:10px;color:#888;margin-top:2px;}
+.save-del { background:#ffebee;border:1px solid #ffcdd2;color:#c62828;border-radius:5px;padding:3px 9px;font-size:11px;cursor:pointer; }
+.save-del:hover{background:#ffcdd2;}
+.last-save-bar { font-size:11px;padding:6px 12px;border-radius:6px;margin-top:8px;text-align:center;color:#1565c0;background:rgba(21,101,192,.08);border:1px solid rgba(21,101,192,.2); }
+
+/* TOAST */
+.toast {
+  position:fixed;bottom:20px;right:20px;z-index:2000;
+  padding:12px 18px;border-radius:10px;font-size:13px;color:#111;
+  background:#fff;border:1px solid #ddd;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+  display:flex;align-items:center;gap:10px;
+  transform:translateY(60px);opacity:0;
+  transition:transform .3s ease,opacity .3s ease;
+  pointer-events:none;max-width:360px;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.ok {border-color:#a5d6a7;background:#f1f8f1;}
+.toast.err{border-color:#ffcdd2;background:#fff5f5;}
+
+@media (max-width:640px) {
+  .form-grid { grid-template-columns:1fr; }
+  .jury-grid, .stat-row, .visa-grid { grid-template-columns:1fr; }
+  .engin-grid { grid-template-columns:repeat(2,1fr); }
+  .smileys { gap:2px; }
+  .sb, .sb-auto { width:26px; height:26px; font-size:13px; }
+}
+@media print {
+  .tabs,.btn-row,.btn-save-hdr,.modal-overlay,.toast,.photo-btns,.nr-btn { display:none!important; }
+  .nr-btn.active::after { content:'NR';display:inline-block!important;background:#e53935;color:#fff;font-size:9px;font-weight:bold;border-radius:4px;padding:2px 6px; }
+  .nr-btn.active { display:inline-block!important; }
+  body{background:white;color:black;}
+  .card{border:1px solid #ccc;background:white;}
+  input,textarea{border:1px solid #ccc!important;color:black!important;background:white!important;}
+  .sig-canvas{border:1px solid #999!important;border-style:solid!important;}
+  .sig-btn,.sig-placeholder{display:none!important;}
+  body.print-single .section { display:none!important; }
+  body.print-single .section.print-target { display:block!important; }
+  body:not(.print-single) .section { display:block!important; page-break-after:always; }
+  body.print-single .header { display:none!important; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">SDIS<br>38</div>
+  <div>
+    <div class="header-title">Livret CSO – Complémentaire 4,5t</div>
+    <div class="header-sub" id="hdr_name">N° stage : 26/COD CSO complémentaire 4.5t /GFOR/</div>
+  </div>
+  <div id="hdr_badge" class="badge">–</div>
+  <button class="btn-save-hdr" id="btnSaveHdr" onclick="openModal()">💾 Enregistrer</button>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="goTab(0)">👤 Identité</button>
+  <button class="tab-btn"        onclick="goTab(1)">📋 Bilan CSO</button>
+  <button class="tab-btn"        onclick="goTab(2)">📊 Synthèse détaillée</button>
+  <button class="tab-btn"        onclick="goTab(3)">🚗 Parcours tutoré</button>
+  <button class="tab-btn"        onclick="goTab(4)">⚖️ Jury &amp; Visas</button>
+</div>
+
+<!-- =========================================================
+     ONGLET 0 : IDENTITÉ
+     ========================================================= -->
+<div class="section active" id="s0">
+
+  <div class="card">
+    <div class="card-title">👤 Identité de l'apprenant</div>
+    <div class="photo-wrap">
+      <div class="photo-preview" id="photo_preview" onclick="document.getElementById('photo_input').click()" title="Cliquez pour ajouter une photo">
+        <span id="photo_placeholder">📷</span>
+        <img id="photo_img" src="" style="display:none;">
+      </div>
+      <div class="photo-btns">
+        <button type="button" class="photo-btn" onclick="document.getElementById('photo_input').click()">📁 Importer</button>
+        <button type="button" class="photo-btn" onclick="openCamera()">📷 Caméra</button>
+        <button type="button" class="photo-btn danger" onclick="clearPhoto()" id="photo_del" style="display:none;">✕ Supprimer</button>
+      </div>
+      <input type="file" id="photo_input" accept="image/*" style="display:none" onchange="loadPhotoFromFile(event)">
+      <div id="camera_wrap" style="display:none;flex-direction:column;align-items:center;gap:8px;">
+        <video id="camera_video" autoplay playsinline style="width:220px;border-radius:8px;border:1px solid #bbb;"></video>
+        <div class="photo-btns">
+          <button type="button" class="photo-btn" onclick="snapPhoto()">📸 Prendre la photo</button>
+          <button type="button" class="photo-btn danger" onclick="stopCamera()">✕ Annuler</button>
+        </div>
+      </div>
+      <canvas id="photo_canvas" style="display:none;"></canvas>
+    </div>
+    <div class="form-grid">
+      <div class="form-group"><label>Prénom</label><input type="text" id="f_prenom" placeholder="Prénom" oninput="scheduleAutoSave()"></div>
+      <div class="form-group"><label>Nom</label><input type="text" id="f_nom" placeholder="NOM" oninput="scheduleAutoSave()"></div>
+      <div class="form-group"><label>Matricule</label><input type="text" id="f_mat" placeholder="38-XXXX" oninput="scheduleAutoSave()"></div>
+      <div class="form-group"><label>Affectation</label><input type="text" id="f_aff" placeholder="CS / CIS de..." oninput="scheduleAutoSave()"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Stage</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>N° du stage</label>
+        <input type="text" id="f_nomstage" value="26/COD CSO complémentaire 4.5t /GFOR/" oninput="scheduleAutoSave()">
+      </div>
+      <div class="form-group">
+        <label>Date début</label>
+        <input type="date" id="f_deb" oninput="scheduleAutoSave()" style="background:#fff;border:1px solid #ccc;border-radius:6px;padding:8px 12px;font-size:13px;color:#111;outline:none;width:100%;">
+        <div id="datedisplay_f_deb" style="font-size:11px;color:#888;margin-top:3px;min-height:14px;"></div>
+      </div>
+      <div class="form-group">
+        <label>Date fin</label>
+        <input type="date" id="f_fin" oninput="scheduleAutoSave()" style="background:#fff;border:1px solid #ccc;border-radius:6px;padding:8px 12px;font-size:13px;color:#111;outline:none;width:100%;">
+        <div id="datedisplay_f_fin" style="font-size:11px;color:#888;margin-top:3px;min-height:14px;"></div>
+      </div>
+      <div class="form-group full">
+        <label>Responsable pédagogique</label>
+        <input type="text" id="f_resp" value="BERNARD-BRET Philippe" oninput="scheduleAutoSave()">
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="printTab(0)">🖨️ Imprimer</button>
+    <button class="btn btn-primary" onclick="goTab(1)">Bilan CSO →</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     ONGLET 1 : BILAN DE COMPÉTENCES CSO (6 critères synthèse)
+     ========================================================= -->
+<div class="section" id="s1">
+
+  <div class="card">
+    <div class="day-header">
+      <span style="font-size:22px;">📋</span>
+      <div>
+        <div class="day-header-title">Bilan de compétences – Conduite en situation opérationnelle</div>
+        <div style="font-size:11px;color:#666;margin-top:2px;">Évaluation sur 4 niveaux — jury pratique</div>
+      </div>
+      <div style="margin-left:auto;">
+        <label style="font-size:10px;color:#666;display:block;margin-bottom:3px;letter-spacing:1px;font-weight:bold;">📅 DATE D'ÉVALUATION</label>
+        <input type="date" id="date_eval" oninput="scheduleAutoSave()" style="background:#fff;border:1px solid #ccc;border-radius:6px;padding:5px 10px;color:#111;font-size:12px;outline:none;">
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="li"><div style="width:14px;height:14px;border-radius:3px;background:#333;border:1px solid #111;flex-shrink:0;"></div>Insuffisant</div>
+      <div class="li"><div style="width:14px;height:14px;border-radius:3px;background:#e53935;border:1px solid #c62828;flex-shrink:0;"></div>À améliorer</div>
+      <div class="li"><div style="width:14px;height:14px;border-radius:3px;background:#fb8c00;border:1px solid #e65100;flex-shrink:0;"></div>Assez bon</div>
+      <div class="li"><div style="width:14px;height:14px;border-radius:3px;background:#43a047;border:1px solid #2e7d32;flex-shrink:0;"></div>Très bien</div>
+    </div>
+
+    <table class="eval-table">
+      <thead>
+        <tr>
+          <th class="th-comp" style="width:55%;">Critère</th>
+          <th class="th-form" style="width:35%;">Appréciation du jury</th>
+          <th class="th-nr" style="width:10%;">NR</th>
+        </tr>
+      </thead>
+      <tbody id="tbody_bilan"></tbody>
+    </table>
+
+    <div class="diag-footer" style="margin-top:16px;">
+      <div>
+        <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Cases insuffisantes</div>
+        <div class="diag-grise-num" id="bilan_grise_num">–</div>
+      </div>
+      <div style="width:220px;">
+        <div style="font-size:10px;color:#888;margin-bottom:5px;text-align:right;">Niveau global</div>
+        <div class="global-bar-bg"><div class="global-bar-fill" id="bilan_bar" style="width:0%;background:#cc0000;"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Observations du jury</div>
+    <div class="form-group">
+      <textarea id="obs_bilan" placeholder="Points forts et axes d'amélioration observés lors de l'évaluation..." style="min-height:100px;" oninput="scheduleAutoSave()"></textarea>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTab(0)">← Identité</button>
+    <button class="btn btn-primary"   onclick="printTab(1)">🖨️ Imprimer</button>
+    <button class="btn btn-primary"   onclick="goTab(2)">Synthèse détaillée →</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     ONGLET 2 : SYNTHÈSE DÉTAILLÉE (19 compétences)
+     ========================================================= -->
+<div class="section" id="s2">
+
+  <div style="background:#e3f2fd;border:1px solid #90caf9;border-left:4px solid #1976d2;border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:12px;color:#0d47a1;display:flex;align-items:flex-start;gap:10px;">
+    <span style="font-size:18px;flex-shrink:0;">ℹ️</span>
+    <div>
+      <strong>Bilan de compétences détaillé</strong><br>
+      Évaluation complète sur 19 compétences réparties en 3 catégories : Comportement, Technique et Sécurité.<br>
+      Colonne <strong style="color:#e65100;">Accompagnateur (O)</strong> selon le document PDF officiel.
+    </div>
+  </div>
+
+  <div class="card" style="overflow-x:auto;">
+    <div class="card-title">🔍 Compétences détaillées</div>
+    <div style="display:grid;grid-template-columns:60% 1fr 7%;gap:6px;margin-bottom:10px;padding:0 5px;">
+      <div></div>
+      <div style="background:rgba(230,81,0,.08);border:1px solid rgba(230,81,0,.2);border-radius:6px;padding:6px 10px;font-size:11px;color:#e65100;font-weight:bold;text-align:center;">
+        ○ Accompagnateur<br><span style="font-size:10px;font-weight:normal;opacity:.8;">Évaluation formateur</span>
+      </div>
+      <div></div>
+    </div>
+    <table class="eval-table">
+      <thead><tr>
+        <th class="th-comp" style="width:60%;">Compétence</th>
+        <th class="th-form" style="width:32%;">○ Accompagnateur</th>
+        <th class="th-nr"   style="width:8%;">NR</th>
+      </tr></thead>
+      <tbody id="tbody_detail"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Axe d'amélioration</div>
+    <textarea id="obs_axe" placeholder="Axe d'amélioration principal identifié..." oninput="scheduleAutoSave()"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title">✅ Résultat</div>
+    <textarea id="obs_resultat" placeholder="Résultat final et commentaires..." oninput="scheduleAutoSave()"></textarea>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTab(1)">← Bilan CSO</button>
+    <button class="btn btn-primary"   onclick="printTab(2)">🖨️ Imprimer</button>
+    <button class="btn btn-primary"   onclick="goTab(3)">Parcours tutoré →</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     ONGLET 3 : PARCOURS DE CONDUITE TUTORÉ
+     ========================================================= -->
+<div class="section" id="s3">
+
+  <div class="card">
+    <div class="card-title">👨‍🏫 Tuteur</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Prénom du tuteur</label><input type="text" id="t_prenom" placeholder="Prénom" oninput="scheduleAutoSave()"></div>
+      <div class="form-group"><label>Nom du tuteur</label><input type="text" id="t_nom" placeholder="NOM" oninput="scheduleAutoSave()"></div>
+      <div class="form-group"><label>Matricule</label><input type="text" id="t_mat" placeholder="38-XXXX" oninput="scheduleAutoSave()"></div>
+      <div class="form-group"><label>Affectation</label><input type="text" id="t_aff" placeholder="CS / CIS de..." oninput="scheduleAutoSave()"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚒 Adaptation engin</div>
+    <p style="font-size:12px;color:#888;margin-bottom:14px;">Cochez le ou les engins sur lesquels la conduite tutorée a été réalisée.</p>
+    <div class="engin-grid" id="engin_grid">
+      <!-- généré JS -->
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTab(2)">← Synthèse détaillée</button>
+    <button class="btn btn-primary"   onclick="printTab(3)">🖨️ Imprimer</button>
+    <button class="btn btn-primary"   onclick="goTab(4)">Jury &amp; Visas →</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     ONGLET 4 : JURY & VISAS
+     ========================================================= -->
+<div class="section" id="s4">
+
+  <div class="stat-row" id="jury_stats"></div>
+
+  <div class="card">
+    <div class="card-title">⚠️ Compétences insuffisantes</div>
+    <div id="jury_problems"><p style="color:#888;font-size:13px;text-align:center;padding:16px;">✅ Aucune compétence insuffisante détectée.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✅ Points maîtrisés</div>
+    <div id="jury_ok"><p style="color:#888;font-size:13px;padding:8px;">Aucune compétence maîtrisée pour l'instant.</p></div>
+  </div>
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">⚖️ Décision du Jury</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚖️ Décision du jury</div>
+    <div class="jury-grid">
+      <div class="jury-opt" id="j_v"  onclick="pickJury('v')">
+        <div class="jury-icon">✅</div>
+        <div class="jury-label" style="color:#43a047;">VALIDÉ(E)</div>
+        <div class="jury-desc">Niveau atteint</div>
+      </div>
+      <div class="jury-opt" id="j_a1" onclick="pickJury('a1')">
+        <div class="jury-icon">🔄</div>
+        <div class="jury-label" style="color:#fb8c00;">AJOURNÉ(E)</div>
+        <div class="jury-desc">Perfectionnement tuteuré en caserne</div>
+      </div>
+      <div class="jury-opt" id="j_a2" onclick="pickJury('a2')">
+        <div class="jury-icon">📚</div>
+        <div class="jury-label" style="color:#e53935;">AJOURNÉ(E)</div>
+        <div class="jury-desc">Refaire J1 et J3 du module</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Observations finales du jury</div>
+    <div class="form-group">
+      <textarea id="j_obs" rows="4" placeholder="Commentaires, recommandations, points de vigilance pour la suite..." oninput="scheduleAutoSave()"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🖊️ Signatures</div>
+    <div class="visa-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="visa-box">
+        <div class="visa-title">Responsable pédagogique</div>
+        <div class="sig-wrap">
+          <canvas id="sig_resp" class="sig-canvas" width="400" height="120"></canvas>
+          <div class="sig-placeholder" id="sig_resp_ph">✍️ Signer ici</div>
+        </div>
+        <div class="sig-actions">
+          <button class="sig-btn clear" onclick="clearSig('resp')">✕ Effacer</button>
+        </div>
+        <div class="visa-name" id="v_resp" style="font-size:11px;color:#666;margin-top:4px;"></div>
+      </div>
+      <div class="visa-box">
+        <div class="visa-title">Apprenant</div>
+        <div style="text-align:center;margin-bottom:8px;">
+          <img id="bilan_photo" src="" style="display:none;width:60px;height:75px;object-fit:cover;border-radius:6px;border:1px solid #ddd;">
+        </div>
+        <div class="sig-wrap">
+          <canvas id="sig_app" class="sig-canvas" width="400" height="120"></canvas>
+          <div class="sig-placeholder" id="sig_app_ph">✍️ Signer ici</div>
+        </div>
+        <div class="sig-actions">
+          <button class="sig-btn clear" onclick="clearSig('app')">✕ Effacer</button>
+        </div>
+        <div class="visa-name" id="v_app" style="font-size:11px;color:#666;margin-top:4px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTab(3)">← Parcours tutoré</button>
+    <button class="btn btn-primary"   onclick="printTab(4)">🖨️ Imprimer</button>
+    <button class="btn btn-warn"      onclick="resetAll()">🗑️ Réinitialiser</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     MODAL GESTION DES LIVRETS
+     ========================================================= -->
+<div class="modal-overlay" id="saveModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-title">
+      💾 Gestion des livrets stagiaires
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="mblock">
+      <div class="mblock-title">👤 Nom du stagiaire</div>
+      <input type="text" class="minput" id="modal_stag" placeholder="NOM Prénom">
+      <div style="font-size:11px;color:#888;">Rempli automatiquement depuis l'onglet Identité</div>
+      <div class="last-save-bar" id="last_save_bar" style="display:none;"></div>
+    </div>
+    <div class="mblock">
+      <div class="mblock-title">🖥️ Sauvegarde locale (navigateur)</div>
+      <button class="mbtn mbtn-loc" onclick="saveLocal()">💾 Enregistrer ici</button>
+      <div style="font-size:11px;color:#888;">⚠️ Effacé si vous videz le cache du navigateur.</div>
+    </div>
+    <div class="mblock">
+      <div class="mblock-title">📋 Livrets enregistrés localement</div>
+      <div class="save-list" id="saveList"></div>
+    </div>
+    <div class="mblock" id="sp_block">
+      <div class="mblock-title">&#9729;&#65039; OneDrive / SharePoint SDIS 38</div>
+      <div id="sp_account_bar" style="display:none;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:rgba(0,120,212,.08);border:1px solid rgba(0,120,212,.2);margin-bottom:10px;">
+        <span id="sp_account_name" style="font-size:12px;color:#0078d4;font-weight:bold;flex:1;"></span>
+        <button onclick="spLogout()" style="font-size:11px;padding:3px 10px;border-radius:12px;border:1px solid #0078d4;background:#fff;color:#0078d4;cursor:pointer;">Deconnecter</button>
+      </div>
+      <button class="mbtn mbtn-onedrive" id="sp_btn_save" onclick="spSave()">&#9729;&#65039; Enregistrer sur OneDrive</button>
+      <button class="mbtn" id="sp_btn_open" onclick="spOpen()" style="background:#107c41;margin-top:0;">&#128194; Ouvrir depuis OneDrive</button>
+      <div style="margin-top:8px;">
+        <button onclick="spToggleCfg()" style="font-size:11px;color:#888;background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:4px;">
+          <span id="sp_cfg_arrow">&#9654;</span> Configuration OneDrive
+        </button>
+        <div id="sp_cfg_panel" style="display:none;margin-top:10px;padding:10px;background:#f8f8f8;border-radius:8px;border:1px solid #e0e0e0;">
+          <div style="font-size:11px;font-weight:bold;color:#666;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Lien du dossier OneDrive</div>
+          <input class="minput" id="sp_folder_url" placeholder="https://sdis38-my.sharepoint.com/personal/...">
+          <div style="font-size:11px;color:#888;margin-bottom:10px;">Collez le lien du dossier OneDrive/SharePoint où stocker les livrets.</div>
+          <div style="font-size:11px;font-weight:bold;color:#666;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">ID Application Azure (client ID)</div>
+          <input class="minput" id="sp_client_id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+          <button class="mbtn mbtn-onedrive" onclick="spSaveCfg()" style="margin-top:6px;">&#128190; Enregistrer la configuration</button>
+        </div>
+      </div>
+    </div>
+    <div class="mblock">
+      <div class="mblock-title">📁 Export / Import manuel (.json)</div>
+      <button class="mbtn mbtn-dl"   onclick="exportJSON()">📥 Télécharger le fichier .json</button>
+      <button class="mbtn mbtn-load" onclick="triggerImport()">📂 Importer un fichier .json</button>
+    </div>
+    <input type="file" id="fileInput" accept=".json" style="display:none" onchange="loadFromJSON(event)">
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   DONNÉES
+   ============================================================ */
+
+/* 6 critères du Bilan CSO officiel */
+var BILAN_COMPS = [
+  { id:'b_prise',       label:'Prise en compte d\'un véhicule',   sub:'', cat:'Comportement' },
+  { id:'b_aisance',     label:'Aisance dans la conduite',          sub:'', cat:'Comportement' },
+  { id:'b_gabarit',     label:'Appréciation gabarit',              sub:'', cat:'Technique'    },
+  { id:'b_anticip',     label:'Anticipation',                      sub:'', cat:'Technique'    },
+  { id:'b_code',        label:'Respect du code de la route',       sub:'', cat:'Sécurité'     },
+  { id:'b_secu',        label:'Sécurité',                          sub:'', cat:'Sécurité'     },
+];
+
+/* 19 compétences détaillées (doc PDF officiel SDIS38) */
+var DETAIL_COMPS = [
+  /* Comportement */
+  { id:'d_prise',   label:'Prise en compte du véhicule',               sub:'',                                              cat:'Comportement' },
+  { id:'d_install', label:'Installation au poste de conduite',          sub:'',                                              cat:'Comportement' },
+  { id:'d_aisance', label:'Aisance à la conduite',                      sub:'',                                              cat:'Comportement' },
+  { id:'d_stress',  label:'Comportement du stagiaire',                  sub:'Stress, ouvert à la discussion',                cat:'Comportement' },
+  /* Technique */
+  { id:'d_traje',   label:'Choix et réalisation d\'une trajectoire sécurisante', sub:'',                                    cat:'Technique'    },
+  { id:'d_allure',  label:'Allure & rapport adapté à la situation',     sub:'Anticipation poids véhicule',                   cat:'Technique'    },
+  { id:'d_gabarit', label:'Appréciation du gabarit',                   sub:'',                                              cat:'Technique'    },
+  { id:'d_vitesse', label:'Passage de vitesse',                        sub:'',                                              cat:'Technique'    },
+  { id:'d_voie',    label:'Positionner son véhicule & choisir sa voie', sub:'',                                             cat:'Technique'    },
+  { id:'d_souple',  label:'Souplesse – conduite type transport de victime', sub:'',                                         cat:'Technique'    },
+  { id:'d_cote',    label:'Démarrage en côte',                         sub:'',                                              cat:'Technique'    },
+  { id:'d_dist',    label:'Évaluer et maintenir les distances de sécurité', sub:'',                                         cat:'Technique'    },
+  { id:'d_intersec',label:'Détecter, identifier et franchir les intersections en sécurité', sub:'',                         cat:'Technique'    },
+  { id:'d_rapide',  label:'S\'insérer, circuler et sortir d\'une voie rapide', sub:'',                                      cat:'Technique'    },
+  { id:'d_station', label:'Quitter un stationnement, s\'insérer dans la circulation', sub:'',                               cat:'Technique'    },
+  /* Sécurité */
+  { id:'d_cabine',  label:'Sécurité cabine',                           sub:'',                                              cat:'Sécurité'     },
+  { id:'d_signal',  label:'Lecture de la signalisation spécifique',    sub:'',                                              cat:'Sécurité'     },
+  { id:'d_code_sp', label:'Respect du code de la route & spécifique au véhicule', sub:'',                                   cat:'Sécurité'     },
+  { id:'d_danger',  label:'Connaître & appréhender les points dangereux du secteur', sub:'',                                cat:'Sécurité'     },
+];
+
+var ENGINS = [
+  { id:'e_vsav',     label:'VSAV',      icon:'🚑' },
+  { id:'e_vsavhr',   label:'VSAV HR',   icon:'🚑' },
+  { id:'e_vsavhr4t5',label:'VSAV HR 4T5',icon:'🚒' },
+  { id:'e_vtue',     label:'VTUE',      icon:'🚐' },
+];
+
+var PARCOURS_SEANCES = [
+  { id:'p1', label:'Conduite 1',   type:'conduite' },
+  { id:'p2', label:'Conduite 2',   type:'conduite' },
+  { id:'p3', label:'Conduite 3',   type:'conduite' },
+  { id:'p4', label:'Conduite 4',   type:'conduite' },
+  { id:'p5', label:'Conduite 5',   type:'conduite' },
+  { id:'p6', label:'Guidage',      type:'guidage'  },
+  { id:'p7', label:'Validation',   type:'valid'    },
+];
+
+var CAT_COLOR = { Comportement:'#2196f3', Technique:'#fb8c00', 'Sécurité':'#e53935' };
+var CAT_ICON  = { Comportement:'🧠',      Technique:'⚙️',      'Sécurité':'🛡️' };
+var SM = [
+  { v:1, cls:'s1', lbl:'Insuffisant' },
+  { v:2, cls:'s2', lbl:'À améliorer' },
+  { v:3, cls:'s3', lbl:'Assez bon'   },
+  { v:4, cls:'s4', lbl:'Très bien'   },
+];
+
+/* ── State ── */
+var RB  = {}; // bilan (6)
+var NRB = {};
+var RD  = {}; // détail (19)
+var NRD = {};
+var RE  = {}; // engins
+var RP  = {}; // parcours dates+obs
+var JU  = '';
+BILAN_COMPS.forEach(function(c){ RB[c.id]=null; NRB[c.id]=false; });
+DETAIL_COMPS.forEach(function(c){ RD[c.id]={stag:null,form:null}; NRD[c.id]=false; });
+ENGINS.forEach(function(e){ RE[e.id]=false; });
+PARCOURS_SEANCES.forEach(function(s){ RP[s.id]={date:'',obs:''}; });
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function goTab(n) {
+  document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active',i===n); });
+  document.querySelectorAll('.tab-btn').forEach(function(b,i){ b.classList.toggle('active',i===n); });
+  if(n===4) refreshJuryStats();
+}
+
+/* ============================================================
+   UTILITAIRES
+   ============================================================ */
+function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function getStagName(){ return ((document.getElementById('f_nom')||{}).value||'').trim()+' '+((document.getElementById('f_prenom')||{}).value||'').trim(); }
+function formatDateFR(iso){ if(!iso)return''; var p=iso.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
+function avg(arr){ if(!arr.length)return null; return arr.reduce(function(a,b){return a+b;},0)/arr.length; }
+
+function fmtDate(id) {
+  var el=document.getElementById(id);
+  if(!el)return;
+  var dsp=document.getElementById('datedisplay_'+id);
+  if(!dsp)return;
+  var v=el.value;
+  if(!v){dsp.textContent='';return;}
+  var d=new Date(v+'T12:00:00');
+  var j=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'][d.getDay()];
+  var m=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][d.getMonth()];
+  dsp.textContent=j+' '+d.getDate()+' '+m+' '+d.getFullYear();
+}
+['f_deb','f_fin'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el) el.addEventListener('change',function(){fmtDate(id);scheduleAutoSave();});
+});
+
+/* toast */
+var _toastT=null;
+function toast(msg,type,dur){
+  var t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg; t.className='toast show '+(type||'');
+  clearTimeout(_toastT);
+  _toastT=setTimeout(function(){t.classList.remove('show');},dur||3000);
+}
+
+/* ============================================================
+   CONSTRUCTION TABLEAUX
+   ============================================================ */
+function buildBilan() {
+  var tbody=document.getElementById('tbody_bilan');
+  if(!tbody)return;
+  tbody.innerHTML='';
+  var lastCat='';
+  BILAN_COMPS.forEach(function(comp){
+    if(comp.cat!==lastCat){
+      lastCat=comp.cat;
+      var tr=document.createElement('tr'); tr.className='cat-row';
+      var td=document.createElement('td'); td.colSpan=3;
+      td.style.color=CAT_COLOR[comp.cat]||'#cc0000';
+      td.textContent=(CAT_ICON[comp.cat]||'')+' '+comp.cat;
+      tr.appendChild(td); tbody.appendChild(tr);
+    }
+    tbody.appendChild(makeBilanRow(comp));
+  });
+  updateBilanGrise();
+}
+
+function makeBilanRow(comp) {
+  var tr=document.createElement('tr');
+  /* Nom */
+  var tdN=document.createElement('td');
+  tdN.innerHTML='<div class="comp-name">'+comp.label+'</div>'+(comp.sub?'<div class="comp-sub">'+comp.sub+'</div>':'');
+  tr.appendChild(tdN);
+  /* Pastilles jury */
+  var tdF=document.createElement('td'); tdF.className='smiley-cell';
+  var sg=makeSGBilan(comp.id);
+  tdF.appendChild(sg); tr.appendChild(tdF);
+  /* NR */
+  var tdNR=document.createElement('td'); tdNR.className='nr-cell';
+  var nrb=document.createElement('button');
+  nrb.className='nr-btn'+(NRB[comp.id]?' active':'');
+  nrb.textContent='NR'; nrb.title='Non Réalisé';
+  nrb.onclick=(function(cId,btn,sgEl){
+    return function(){
+      NRB[cId]=!NRB[cId];
+      btn.classList.toggle('active',NRB[cId]);
+      if(NRB[cId]){ RB[cId]=null; sgEl.querySelectorAll('.sb').forEach(function(b){b.className='sb';}); }
+      updateBilanGrise(); scheduleAutoSave();
+    };
+  })(comp.id,nrb,sg);
+  tdNR.appendChild(nrb); tr.appendChild(tdNR);
+  return tr;
+}
+
+function makeSGBilan(compId) {
+  var sg=document.createElement('div'); sg.className='smileys';
+  SM.forEach(function(s){
+    var btn=document.createElement('button');
+    btn.className='sb'+(RB[compId]===s.v?' '+s.cls:'');
+    btn.title=s.lbl;
+    btn.onclick=(function(cId,sv,sgroup){
+      return function(){
+        RB[cId]=sv; NRB[cId]=false;
+        var nrb=sgroup.closest('tr').querySelector('.nr-btn');
+        if(nrb) nrb.classList.remove('active');
+        sgroup.querySelectorAll('.sb').forEach(function(b,i){b.className='sb'+(SM[i].v===sv?' '+SM[i].cls:'');});
+        updateBilanGrise(); scheduleAutoSave();
+      };
+    })(compId,s.v,sg);
+    sg.appendChild(btn);
+  });
+  return sg;
+}
+
+function updateBilanGrise() {
+  var grise=0; var vals=[];
+  BILAN_COMPS.forEach(function(c){
+    if(!NRB[c.id]&&RB[c.id]!==null){ vals.push(RB[c.id]); if(RB[c.id]<=1) grise++; }
+  });
+  var numEl=document.getElementById('bilan_grise_num');
+  var barEl=document.getElementById('bilan_bar');
+  if(numEl) numEl.textContent=grise;
+  if(barEl){
+    var pct=vals.length?Math.round((avg(vals)-1)/3*100):0;
+    var col=pct<34?'#e53935':pct<67?'#fb8c00':'#43a047';
+    barEl.style.width=pct+'%'; barEl.style.background=col;
+  }
+  /* badge header */
+  var badge=document.getElementById('hdr_badge');
+  if(badge){
+    if(JU==='v'){badge.className='badge valid';badge.textContent='✅ VALIDÉ(E)';}
+    else if(JU==='a1'){badge.className='badge ajourne';badge.textContent='🔄 AJOURNÉ(E)';}
+    else if(JU==='a2'){badge.className='badge ajourne';badge.textContent='📚 AJOURNÉ(E)';}
+    else{badge.className='badge';badge.textContent=grise+' case(s) insuf.';}
+  }
+}
+
+/* Détail 19 compétences */
+function buildDetail() {
+  var tbody=document.getElementById('tbody_detail');
+  if(!tbody)return;
+  tbody.innerHTML='';
+  var lastCat='';
+  DETAIL_COMPS.forEach(function(comp){
+    if(comp.cat!==lastCat){
+      lastCat=comp.cat;
+      var tr=document.createElement('tr'); tr.className='cat-row';
+      var td=document.createElement('td'); td.colSpan=3;
+      td.style.color=CAT_COLOR[comp.cat]||'#cc0000';
+      td.textContent=(CAT_ICON[comp.cat]||'')+' '+comp.cat;
+      tr.appendChild(td); tbody.appendChild(tr);
+    }
+    tbody.appendChild(makeDetailRow(comp));
+  });
+}
+
+function makeDetailRow(comp) {
+  var tr=document.createElement('tr');
+  var tdN=document.createElement('td');
+  tdN.innerHTML='<div class="comp-name">'+comp.label+'</div>'+(comp.sub?'<div class="comp-sub">'+comp.sub+'</div>':'');
+  tr.appendChild(tdN);
+  /* Accompagnateur uniquement */
+  var tdF=document.createElement('td'); tdF.className='smiley-cell';
+  var sgF=makeSGDetail(comp.id,'form');
+  tdF.appendChild(sgF); tr.appendChild(tdF);
+  /* NR */
+  var tdNR=document.createElement('td'); tdNR.className='nr-cell';
+  var nrb=document.createElement('button');
+  nrb.className='nr-btn'+(NRD[comp.id]?' active':'');
+  nrb.textContent='NR';
+  nrb.onclick=(function(cId,btn,s2){
+    return function(){
+      NRD[cId]=!NRD[cId];
+      btn.classList.toggle('active',NRD[cId]);
+      if(NRD[cId]){ RD[cId]={stag:null,form:null}; [s2].forEach(function(sg){sg.querySelectorAll('.sb').forEach(function(b){b.className='sb';});}); }
+      scheduleAutoSave();
+    };
+  })(comp.id,nrb,sgF);
+  tdNR.appendChild(nrb); tr.appendChild(tdNR);
+  return tr;
+}
+
+function makeSGDetail(compId,who) {
+  var sg=document.createElement('div'); sg.className='smileys';
+  SM.forEach(function(s){
+    var btn=document.createElement('button');
+    var cur=(RD[compId]&&RD[compId][who])||null;
+    btn.className='sb'+(cur===s.v?' '+s.cls:'');
+    btn.title=s.lbl;
+    btn.onclick=(function(cId,w,sv,sgroup){
+      return function(){
+        if(!RD[cId]) RD[cId]={};
+        RD[cId][w]=sv; NRD[cId]=false;
+        var nrb=sgroup.closest('tr').querySelector('.nr-btn');
+        if(nrb) nrb.classList.remove('active');
+        sgroup.querySelectorAll('.sb').forEach(function(b,i){b.className='sb'+(SM[i].v===sv?' '+SM[i].cls:'');});
+        scheduleAutoSave();
+      };
+    })(compId,who,s.v,sg);
+    sg.appendChild(btn);
+  });
+  return sg;
+}
+
+/* Parcours calendrier */
+function buildCalendrier() {
+  var tbody=document.getElementById('tbody_calendrier');
+  if(!tbody)return;
+  tbody.innerHTML='';
+  PARCOURS_SEANCES.forEach(function(s){
+    var tr=document.createElement('tr');
+    /* Type */
+    var tdT=document.createElement('td');
+    var bc=s.type==='conduite'?'badge-conduite':s.type==='guidage'?'badge-guidage':'badge-valid';
+    tdT.innerHTML='<span class="parcours-type-badge '+bc+'">'+s.label+'</span>';
+    tr.appendChild(tdT);
+    /* Date */
+    var tdD=document.createElement('td');
+    var inp=document.createElement('input'); inp.type='date';
+    inp.value=RP[s.id].date||'';
+    inp.style.cssText='background:#fff;border:1px solid #ccc;border-radius:6px;padding:5px 10px;color:#111;font-size:12px;outline:none;width:140px;';
+    inp.addEventListener('change',(function(sid,i){return function(){RP[sid].date=i.value;scheduleAutoSave();};})(s.id,inp));
+    tdD.appendChild(inp); tr.appendChild(tdD);
+    /* Obs */
+    var tdO=document.createElement('td');
+    var obs=document.createElement('input'); obs.type='text';
+    obs.placeholder='Observations…'; obs.value=RP[s.id].obs||'';
+    obs.style.cssText='background:#fff;border:1px solid #ccc;border-radius:6px;padding:5px 10px;color:#111;font-size:12px;outline:none;width:100%;';
+    obs.addEventListener('input',(function(sid,i){return function(){RP[sid].obs=i.value;scheduleAutoSave();};})(s.id,obs));
+    tdO.appendChild(obs); tr.appendChild(tdO);
+    tbody.appendChild(tr);
+  });
+}
+
+/* Engins */
+function buildEngins() {
+  var grid=document.getElementById('engin_grid');
+  if(!grid)return;
+  grid.innerHTML='';
+  ENGINS.forEach(function(e){
+    var box=document.createElement('div');
+    box.className='engin-box'+(RE[e.id]?' active':'');
+    box.innerHTML='<div class="engin-icon">'+e.icon+'</div><div class="engin-label">'+e.label+'</div>';
+    box.onclick=(function(eid,bx){
+      return function(){ RE[eid]=!RE[eid]; bx.classList.toggle('active',RE[eid]); scheduleAutoSave(); };
+    })(e.id,box);
+    grid.appendChild(box);
+  });
+}
+
+/* ============================================================
+   JURY STATS
+   ============================================================ */
+function refreshJuryStats() {
+  /* stats bilan */
+  var tot=0,insuf=0,bon=0,tresb=0;
+  BILAN_COMPS.forEach(function(c){
+    if(!NRB[c.id]&&RB[c.id]!==null){
+      tot++;
+      if(RB[c.id]<=1) insuf++;
+      else if(RB[c.id]===4) tresb++;
+      else bon++;
+    }
+  });
+  var statsEl=document.getElementById('jury_stats');
+  if(statsEl){
+    statsEl.innerHTML=
+      '<div class="stat-box"><div class="stat-num" style="color:#e53935;">'+insuf+'</div><div class="stat-lbl">Insuffisant(s)</div></div>'+
+      '<div class="stat-box"><div class="stat-num" style="color:#fb8c00;">'+bon+'</div><div class="stat-lbl">À améliorer / Assez bon</div></div>'+
+      '<div class="stat-box"><div class="stat-num" style="color:#43a047;">'+tresb+'</div><div class="stat-lbl">Très bien</div></div>';
+  }
+  /* problèmes */
+  var prEl=document.getElementById('jury_problems');
+  if(prEl){
+    var items=BILAN_COMPS.filter(function(c){return!NRB[c.id]&&RB[c.id]!==null&&RB[c.id]<=1;});
+    if(!items.length){
+      prEl.innerHTML='<p style="color:#888;font-size:13px;text-align:center;padding:16px;">✅ Aucune compétence insuffisante détectée.</p>';
+    } else {
+      prEl.innerHTML=items.map(function(c){
+        return '<div class="problem-item"><div class="problem-name">'+c.label+'</div><div style="font-size:12px;color:#444;">Catégorie : '+c.cat+'</div></div>';
+      }).join('');
+    }
+  }
+  /* ok */
+  var okEl=document.getElementById('jury_ok');
+  if(okEl){
+    var oks=BILAN_COMPS.filter(function(c){return!NRB[c.id]&&RB[c.id]===4;});
+    if(!oks.length){
+      okEl.innerHTML='<p style="color:#888;font-size:13px;padding:8px;">Aucune compétence au niveau "Très bien" pour l\'instant.</p>';
+    } else {
+      okEl.innerHTML=oks.map(function(c){return '<span class="ok-item">✅ '+c.label+'</span>';}).join('');
+    }
+  }
+  /* photo */
+  var bpEl=document.getElementById('bilan_photo');
+  if(bpEl){
+    var photo=_photoData;
+    if(photo){ bpEl.src=photo; bpEl.style.display='block'; }
+    else { bpEl.style.display='none'; }
+  }
+  /* visa nom */
+  var vApp=document.getElementById('v_app');
+  if(vApp) vApp.textContent=getStagName();
+  var vResp=document.getElementById('v_resp');
+  if(vResp) vResp.textContent=(document.getElementById('f_resp')||{}).value||'';
+}
+
+/* ============================================================
+   DÉCISION JURY
+   ============================================================ */
+function pickJury(v) {
+  JU=JU===v?'':v;
+  ['v','a1','a2'].forEach(function(k){
+    var el=document.getElementById('j_'+k);
+    if(el) el.className='jury-opt'+(JU===k?' sel-'+k:'');
+  });
+  updateBilanGrise(); scheduleAutoSave();
+}
+
+/* ============================================================
+   PHOTO
+   ============================================================ */
+var _photoData = null;
+function loadPhotoFromFile(evt){
+  var file=evt.target.files[0]; if(!file)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    _photoData=e.target.result;
+    document.getElementById('photo_img').src=_photoData;
+    document.getElementById('photo_img').style.display='block';
+    document.getElementById('photo_placeholder').style.display='none';
+    document.getElementById('photo_del').style.display='';
+    scheduleAutoSave();
+  };
+  r.readAsDataURL(file);
+}
+function clearPhoto(){
+  _photoData=null;
+  document.getElementById('photo_img').src=''; document.getElementById('photo_img').style.display='none';
+  document.getElementById('photo_placeholder').style.display='';
+  document.getElementById('photo_del').style.display='none';
+  scheduleAutoSave();
+}
+function openCamera(){
+  var wrap=document.getElementById('camera_wrap');
+  if(!wrap)return;
+  wrap.style.display='flex';
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}}).then(function(stream){
+    var video=document.getElementById('camera_video');
+    video.srcObject=stream; video._stream=stream;
+  }).catch(function(){ toast('Caméra non disponible.','err'); stopCamera(); });
+}
+function snapPhoto(){
+  var video=document.getElementById('camera_video');
+  var canvas=document.getElementById('photo_canvas');
+  canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+  canvas.getContext('2d').drawImage(video,0,0);
+  _photoData=canvas.toDataURL('image/jpeg',.85);
+  document.getElementById('photo_img').src=_photoData; document.getElementById('photo_img').style.display='block';
+  document.getElementById('photo_placeholder').style.display='none';
+  document.getElementById('photo_del').style.display='';
+  stopCamera(); scheduleAutoSave();
+}
+function stopCamera(){
+  var video=document.getElementById('camera_video');
+  if(video._stream) video._stream.getTracks().forEach(function(t){t.stop();});
+  document.getElementById('camera_wrap').style.display='none';
+}
+
+/* ============================================================
+   SIGNATURES
+   ============================================================ */
+var _sigs={};
+function initSig(id){
+  var canvas=document.getElementById('sig_'+id);
+  if(!canvas||canvas._sigInit)return;
+  canvas._sigInit=true;
+  var ctx=canvas.getContext('2d');
+  var drawing=false;
+  function pos(e){
+    var r=canvas.getBoundingClientRect();
+    var sc=canvas.width/r.width;
+    var t=e.touches?e.touches[0]:e;
+    return{x:(t.clientX-r.left)*sc,y:(t.clientY-r.top)*sc};
+  }
+  function start(e){ e.preventDefault(); drawing=true; var p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
+  function move(e){ e.preventDefault(); if(!drawing)return; var p=pos(e); ctx.lineWidth=2; ctx.strokeStyle='#111'; ctx.lineTo(p.x,p.y); ctx.stroke(); canvas.classList.add('signed'); var ph=document.getElementById('sig_'+id+'_ph'); if(ph)ph.style.display='none'; _sigs[id]=canvas.toDataURL(); scheduleAutoSave(); }
+  function stop(){ drawing=false; }
+  canvas.addEventListener('mousedown',start); canvas.addEventListener('mousemove',move); canvas.addEventListener('mouseup',stop); canvas.addEventListener('mouseleave',stop);
+  canvas.addEventListener('touchstart',start); canvas.addEventListener('touchmove',move); canvas.addEventListener('touchend',stop);
+}
+function clearSig(id){
+  var canvas=document.getElementById('sig_'+id);
+  if(!canvas)return;
+  canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+  canvas.classList.remove('signed');
+  var ph=document.getElementById('sig_'+id+'_ph'); if(ph) ph.style.display='';
+  delete _sigs[id]; scheduleAutoSave();
+}
+function initAllSigs(){ ['resp','app'].forEach(initSig); }
+function restoreSig(id,data){
+  var canvas=document.getElementById('sig_'+id);
+  if(!canvas||!data)return;
+  var img=new Image();
+  img.onload=function(){ canvas.getContext('2d').drawImage(img,0,0); canvas.classList.add('signed'); var ph=document.getElementById('sig_'+id+'_ph'); if(ph) ph.style.display='none'; };
+  img.src=data; _sigs[id]=data;
+}
+
+/* ============================================================
+   COLLECT / APPLY STATE
+   ============================================================ */
+function collectState(){
+  return {
+    v: 1,
+    stagiaire: getStagName(),
+    photo: _photoData,
+    id: {
+      prenom:(document.getElementById('f_prenom')||{}).value||'',
+      nom:(document.getElementById('f_nom')||{}).value||'',
+      mat:(document.getElementById('f_mat')||{}).value||'',
+      aff:(document.getElementById('f_aff')||{}).value||'',
+      nomstage:(document.getElementById('f_nomstage')||{}).value||'',
+      deb:(document.getElementById('f_deb')||{}).value||'',
+      fin:(document.getElementById('f_fin')||{}).value||'',
+      resp:(document.getElementById('f_resp')||{}).value||'',
+    },
+    tuteur: {
+      prenom:(document.getElementById('t_prenom')||{}).value||'',
+      nom:(document.getElementById('t_nom')||{}).value||'',
+      mat:(document.getElementById('t_mat')||{}).value||'',
+      aff:(document.getElementById('t_aff')||{}).value||'',
+    },
+    dateEval:(document.getElementById('date_eval')||{}).value||'',
+    RB:RB, NRB:NRB, RD:RD, NRD:NRD, RE:RE, RP:RP,
+    jury:JU,
+    obs: {
+      bilan:(document.getElementById('obs_bilan')||{}).value||'',
+      axe:(document.getElementById('obs_axe')||{}).value||'',
+      plan:(document.getElementById('obs_plan')||{}).value||'',
+      resultat:(document.getElementById('obs_resultat')||{}).value||'',
+      jury:(document.getElementById('j_obs')||{}).value||'',
+    },
+    sigs: _sigs,
+  };
+}
+
+function applyState(st){
+  if(!st)return;
+  if(st.photo){ _photoData=st.photo; document.getElementById('photo_img').src=st.photo; document.getElementById('photo_img').style.display='block'; document.getElementById('photo_placeholder').style.display='none'; document.getElementById('photo_del').style.display=''; }
+  var id=st.id||{};
+  ['prenom','nom','mat','aff','nomstage','deb','fin','resp'].forEach(function(k){ var el=document.getElementById('f_'+k); if(el&&id[k]!==undefined) el.value=id[k]; });
+  ['f_deb','f_fin'].forEach(fmtDate);
+  var t=st.tuteur||{};
+  ['prenom','nom','mat','aff'].forEach(function(k){ var el=document.getElementById('t_'+k); if(el&&t[k]!==undefined) el.value=t[k]; });
+  var de=document.getElementById('date_eval'); if(de&&st.dateEval) de.value=st.dateEval;
+  /* bilan */
+  if(st.RB){ BILAN_COMPS.forEach(function(c){ RB[c.id]=(st.RB[c.id]!==undefined?st.RB[c.id]:null); }); }
+  if(st.NRB){ BILAN_COMPS.forEach(function(c){ NRB[c.id]=!!st.NRB[c.id]; }); }
+  /* détail */
+  if(st.RD){ DETAIL_COMPS.forEach(function(c){ RD[c.id]=st.RD[c.id]||{stag:null,form:null}; }); }
+  if(st.NRD){ DETAIL_COMPS.forEach(function(c){ NRD[c.id]=!!st.NRD[c.id]; }); }
+  /* engins */
+  if(st.RE){ ENGINS.forEach(function(e){ RE[e.id]=!!st.RE[e.id]; }); }
+  /* parcours */
+  if(st.RP){ PARCOURS_SEANCES.forEach(function(s){ RP[s.id]=st.RP[s.id]||{date:'',obs:''}; }); }
+  /* jury */
+  JU=st.jury||'';
+  /* obs */
+  var obs=st.obs||{};
+  ['bilan','axe','plan','resultat','jury'].forEach(function(k){
+    var id2=k==='jury'?'j_obs':'obs_'+k;
+    var el=document.getElementById(id2); if(el&&obs[k]!==undefined) el.value=obs[k];
+  });
+  /* sigs */
+  _sigs={};
+  if(st.sigs){ Object.keys(st.sigs).forEach(function(k){ restoreSig(k,st.sigs[k]); }); }
+  /* rebuild */
+  buildBilan(); buildDetail(); buildEngins();
+  pickJury(JU||'_NONE_'); JU=st.jury||'';
+  updateBilanGrise();
+  var badge=document.getElementById('hdr_badge');
+  if(badge&&st.stagiaire) badge.title=st.stagiaire;
+  var hdrName=document.getElementById('hdr_name');
+  if(hdrName&&st.stagiaire) hdrName.textContent=st.stagiaire;
+}
+
+/* ============================================================
+   SAUVEGARDE LOCALE
+   ============================================================ */
+var _autoSaveTimer=null;
+function scheduleAutoSave(){ clearTimeout(_autoSaveTimer); _autoSaveTimer=setTimeout(function(){saveLocalSilent(getStagName());},2000); }
+var LS_KEY='cso_compl4t5_v1';
+function saveLocalSilent(name){
+  try{
+    var st=collectState();
+    var key=LS_KEY+'_'+safeName(name||'?');
+    localStorage.setItem(key,JSON.stringify(st));
+    localStorage.setItem(LS_KEY+'_last',key);
+    var bar=document.getElementById('last_save_bar');
+    if(bar){ bar.style.display='block'; bar.textContent='💾 Sauvegarde auto — '+new Date().toLocaleTimeString('fr-FR'); }
+    var btn=document.getElementById('btnSaveHdr');
+    if(btn){ btn.classList.add('save-pulse'); setTimeout(function(){btn.classList.remove('save-pulse');},600); }
+    refreshSaveList();
+  }catch(e){}
+}
+function safeName(n){ return n.replace(/[^a-zA-Z0-9_\-éèàùâêîôûçÉÈÀÙÂÊÎÔÛÇ]/g,'_'); }
+
+function saveLocal(){
+  var name=(document.getElementById('modal_stag')||{}).value||getStagName()||'stagiaire';
+  var st=collectState(); st.stagiaire=name;
+  var key=LS_KEY+'_'+safeName(name);
+  try{
+    localStorage.setItem(key,JSON.stringify(st));
+    localStorage.setItem(LS_KEY+'_last',key);
+    toast('✅ Livret de '+name+' enregistré.','ok');
+    refreshSaveList();
+  }catch(e){ toast('❌ Erreur : '+e.message,'err'); }
+}
+
+function refreshSaveList(){
+  var list=document.getElementById('saveList');
+  if(!list)return;
+  var keys=Object.keys(localStorage).filter(function(k){return k.startsWith(LS_KEY+'_')&&k!==LS_KEY+'_last';});
+  if(!keys.length){ list.innerHTML='<div style="font-size:12px;color:#888;padding:8px;">Aucun livret enregistré.</div>'; return; }
+  list.innerHTML='';
+  keys.sort().forEach(function(k){
+    try{
+      var st=JSON.parse(localStorage.getItem(k));
+      var nom=st.stagiaire||k.replace(LS_KEY+'_','');
+      var item=document.createElement('div'); item.className='save-item';
+      item.innerHTML='<div class="save-item-info"><div class="save-item-name">'+escH(nom)+'</div></div>'
+        +'<button class="save-del" onclick="deleteSave(\''+escH(k)+'\')" title="Supprimer">✕</button>';
+      item.querySelector('.save-item-info').addEventListener('click',function(){ loadSave(k); });
+      list.appendChild(item);
+    }catch(e){}
+  });
+}
+
+function loadSave(key){
+  try{
+    var st=JSON.parse(localStorage.getItem(key));
+    if(!st)return;
+    var name=st.stagiaire||'?';
+    if(!confirm('Charger le livret de « '+name+' » ?')) return;
+    applyState(st); initAllSigs();
+    var ms=document.getElementById('modal_stag'); if(ms) ms.value=name;
+    closeModal();
+    toast('📂 Livret de '+name+' chargé.','ok');
+  }catch(e){ toast('❌ Erreur : '+e.message,'err'); }
+}
+
+function deleteSave(key){
+  if(!confirm('Supprimer ce livret ?')) return;
+  localStorage.removeItem(key);
+  refreshSaveList();
+  toast('🗑️ Livret supprimé.','ok');
+}
+
+function exportJSON(){
+  var name=(document.getElementById('modal_stag')||{}).value||getStagName()||'stagiaire';
+  var st=collectState(); st.stagiaire=name;
+  var blob=new Blob([JSON.stringify(st,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='CSO_compl4t5_'+safeName(name)+'.json';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+
+/* ============================================================
+   SHAREPOINT / ONEDRIVE — PKCE OAuth2 + Microsoft Graph
+   ============================================================ */
+var SP_CFG_KEY = 'cso_compl4t5_sp_cfg';
+var _spToken   = null;
+var _spAccount = null;
+
+function spGetCfg(){
+  try{ return JSON.parse(localStorage.getItem(SP_CFG_KEY)||'{}'); }catch(e){ return {}; }
+}
+function spSaveCfg(){
+  var url=(document.getElementById('sp_folder_url')||{}).value||'';
+  var cid=(document.getElementById('sp_client_id')||{}).value||'';
+  if(!url||!cid){ toast('Renseignez le lien du dossier et le client ID.','err'); return; }
+  localStorage.setItem(SP_CFG_KEY, JSON.stringify({folderUrl:url.trim(), clientId:cid.trim()}));
+  toast('Configuration enregistree.','ok');
+  spToggleCfg();
+}
+function spToggleCfg(){
+  var panel=document.getElementById('sp_cfg_panel');
+  var arrow=document.getElementById('sp_cfg_arrow');
+  if(!panel)return;
+  var open=panel.style.display==='none';
+  panel.style.display=open?'block':'none';
+  if(arrow) arrow.innerHTML=open?'&#9660;':'&#9654;';
+  if(open){
+    var cfg=spGetCfg();
+    var fu=document.getElementById('sp_folder_url'); if(fu&&cfg.folderUrl) fu.value=cfg.folderUrl;
+    var ci=document.getElementById('sp_client_id'); if(ci&&cfg.clientId) ci.value=cfg.clientId;
+  }
+}
+
+/* Extrait host + path depuis une URL OneDrive/SharePoint */
+function spParseUrl(url){
+  try{
+    var u=new URL(url);
+    /* OneDrive perso : https://onedrive.live.com/... => non MSAL, usage direct */
+    /* SharePoint : https://xxx.sharepoint.com/personal/yyy/Documents/Dossier */
+    var host=u.hostname; // ex: sdis38-my.sharepoint.com
+    /* Extraire le driveOwner depuis /personal/XXX/ */
+    var m=u.pathname.match(/\/personal\/([^\/]+)\//);
+    var owner=m?m[1]:null;
+    /* Extraire le chemin relatif après /Documents/ */
+    var m2=u.pathname.match(/\/Documents(\/.*)?$/);
+    var relPath=m2?(m2[1]||''):'';
+    /* Ou depuis le paramètre id= */
+    if(!relPath && u.searchParams.get('id')){
+      var idParam=decodeURIComponent(u.searchParams.get('id'));
+      var m3=idParam.match(/\/Documents(\/.*)?$/);
+      if(m3) relPath=m3[1]||'';
+    }
+    return { host:host, owner:owner, relPath:relPath };
+  }catch(e){ return null; }
+}
+
+/* Génère le verifier et le challenge PKCE */
+function spPkceGen(){
+  var arr=new Uint8Array(32);
+  crypto.getRandomValues(arr);
+  var verifier=btoa(String.fromCharCode.apply(null,arr)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+  return crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)).then(function(hash){
+    var challenge=btoa(String.fromCharCode.apply(null,new Uint8Array(hash))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+    return {verifier:verifier, challenge:challenge};
+  });
+}
+
+/* Lance le flux PKCE et retourne un token */
+function spAuth(){
+  var cfg=spGetCfg();
+  if(!cfg.clientId){ toast('Configurez le client ID Azure avant de continuer.','err'); return Promise.reject('no_client_id'); }
+  var parsed=spParseUrl(cfg.folderUrl||'');
+  /* Déduire le tenant depuis le hostname SharePoint */
+  var tenant='common';
+  if(parsed&&parsed.host){
+    var m=parsed.host.match(/^([^.]+)/);
+    if(m) tenant=m[1].replace(/-my$/,'')+'.onmicrosoft.com';
+  }
+  return spPkceGen().then(function(pkce){
+    var state='sp_'+Math.random().toString(36).slice(2);
+    var redirectUri=location.href.split('?')[0].split('#')[0];
+    var authUrl='https://login.microsoftonline.com/'+tenant+'/oauth2/v2.0/authorize'
+      +'?client_id='+encodeURIComponent(cfg.clientId)
+      +'&response_type=code'
+      +'&redirect_uri='+encodeURIComponent(redirectUri)
+      +'&scope='+encodeURIComponent('Files.ReadWrite.All User.Read offline_access')
+      +'&state='+state
+      +'&code_challenge='+pkce.challenge
+      +'&code_challenge_method=S256'
+      +'&prompt=select_account';
+    /* Stocker verifier + state pour le callback */
+    sessionStorage.setItem('sp_pkce_verifier',pkce.verifier);
+    sessionStorage.setItem('sp_pkce_state',state);
+    sessionStorage.setItem('sp_pkce_redirect',redirectUri);
+    sessionStorage.setItem('sp_pkce_clientid',cfg.clientId);
+    sessionStorage.setItem('sp_pkce_tenant',tenant);
+    sessionStorage.setItem('sp_pending_action','save');
+    /* Stocker l'état du livret pour restauration après auth */
+    var name=getStagName()||'stagiaire';
+    var st=collectState(); st.stagiaire=name;
+    sessionStorage.setItem('sp_pending_state',JSON.stringify(st));
+    window.location.href=authUrl;
+    return Promise.reject('redirect');
+  });
+}
+
+/* Échange le code contre un token (callback) */
+function spHandleCallback(){
+  var params=new URLSearchParams(location.search);
+  var code=params.get('code');
+  var state=params.get('state');
+  var storedState=sessionStorage.getItem('sp_pkce_state');
+  if(!code||state!==storedState) return;
+  /* Nettoyer l'URL */
+  history.replaceState({},'',location.pathname);
+  var verifier=sessionStorage.getItem('sp_pkce_verifier');
+  var redirectUri=sessionStorage.getItem('sp_pkce_redirect');
+  var clientId=sessionStorage.getItem('sp_pkce_clientid');
+  var tenant=sessionStorage.getItem('sp_pkce_tenant');
+  var body=new URLSearchParams({
+    grant_type:'authorization_code', code:code,
+    redirect_uri:redirectUri, client_id:clientId,
+    code_verifier:verifier
+  });
+  fetch('https://login.microsoftonline.com/'+tenant+'/oauth2/v2.0/token',{method:'POST',body:body})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.access_token){
+        _spToken=data.access_token;
+        /* Récupérer infos compte */
+        return fetch('https://graph.microsoft.com/v1.0/me',{headers:{Authorization:'Bearer '+_spToken}})
+          .then(function(r){return r.json();})
+          .then(function(me){
+            _spAccount=me.displayName||me.userPrincipalName||'Utilisateur';
+            spUpdateAccountBar();
+            /* Exécuter l'action en attente */
+            var action=sessionStorage.getItem('sp_pending_action');
+            var stJson=sessionStorage.getItem('sp_pending_state');
+            sessionStorage.removeItem('sp_pending_action');
+            sessionStorage.removeItem('sp_pending_state');
+            if(action==='save'&&stJson){
+              var st=JSON.parse(stJson);
+              spUpload(st);
+            } else if(action==='open'){
+              spListFiles();
+            }
+          });
+      } else {
+        toast('Erreur auth : '+(data.error_description||data.error||'inconnue'),'err');
+      }
+    }).catch(function(e){ toast('Erreur reseau auth : '+e.message,'err'); });
+}
+
+function spUpdateAccountBar(){
+  var bar=document.getElementById('sp_account_bar');
+  var name=document.getElementById('sp_account_name');
+  if(bar){ bar.style.display=_spAccount?'flex':'none'; }
+  if(name&&_spAccount) name.textContent='Connecte : '+_spAccount;
+}
+
+function spLogout(){
+  _spToken=null; _spAccount=null;
+  spUpdateAccountBar();
+  toast('Deconnecte.','ok');
+}
+
+/* Construit l'URL Graph pour uploader dans le dossier configure */
+function spBuildUploadUrl(filename){
+  var cfg=spGetCfg();
+  var parsed=spParseUrl(cfg.folderUrl||'');
+  if(!parsed||!parsed.owner){
+    /* Fallback OneDrive personnel */
+    var rel=(parsed&&parsed.relPath)||'/Livrets CSO';
+    return 'https://graph.microsoft.com/v1.0/me/drive/root:'+rel+'/'+encodeURIComponent(filename)+':/content';
+  }
+  /* SharePoint : utiliser /users/{owner}/drive/root: */
+  var rel=parsed.relPath||'';
+  return 'https://graph.microsoft.com/v1.0/users/'+encodeURIComponent(parsed.owner)
+    +'/drive/root:'+rel+'/'+encodeURIComponent(filename)+':/content';
+}
+
+function spUpload(st){
+  var name=st.stagiaire||getStagName()||'stagiaire';
+  var filename='CSO_compl4t5_'+safeName(name)+'.json';
+  var body=JSON.stringify(st,null,2);
+  var url=spBuildUploadUrl(filename);
+  toast('Envoi vers OneDrive...','ok',8000);
+  fetch(url,{
+    method:'PUT',
+    headers:{'Authorization':'Bearer '+_spToken,'Content-Type':'application/json'},
+    body:body
+  }).then(function(r){
+    if(r.ok){ toast('Livret de '+name+' enregistre sur OneDrive.','ok'); }
+    else { r.json().then(function(e){ toast('Erreur upload : '+(e.error&&e.error.message)||r.status,'err'); }); }
+  }).catch(function(e){ toast('Erreur reseau : '+e.message,'err'); });
+}
+
+function spSave(){
+  if(!_spToken){ spAuth(); return; }
+  var name=(document.getElementById('modal_stag')||{}).value||getStagName()||'stagiaire';
+  var st=collectState(); st.stagiaire=name;
+  spUpload(st);
+}
+
+function spOpen(){
+  if(!_spToken){
+    sessionStorage.setItem('sp_pending_action','open');
+    spAuth(); return;
+  }
+  spListFiles();
+}
+
+function spListFiles(){
+  var cfg=spGetCfg();
+  var parsed=spParseUrl(cfg.folderUrl||'');
+  var listUrl;
+  if(!parsed||!parsed.owner){
+    var rel=(parsed&&parsed.relPath)||'/Livrets CSO';
+    listUrl='https://graph.microsoft.com/v1.0/me/drive/root:'+rel+':/children?$filter=endswith(name,\'.json\')&$select=id,name,lastModifiedDateTime';
+  } else {
+    var rel2=parsed.relPath||'';
+    listUrl='https://graph.microsoft.com/v1.0/users/'+encodeURIComponent(parsed.owner)
+      +'/drive/root:'+rel2+':/children?$filter=endswith(name,\'.json\')&$select=id,name,lastModifiedDateTime';
+  }
+  fetch(listUrl,{headers:{Authorization:'Bearer '+_spToken}})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var items=(data.value||[]).filter(function(f){return f.name.startsWith('CSO_compl4t5_');});
+      if(!items.length){ toast('Aucun livret CSO 4.5t sur OneDrive.','ok'); return; }
+      var chosen=items.length===1?items[0]:null;
+      if(!chosen){
+        var names=items.map(function(f,i){return (i+1)+'. '+f.name;}).join('\n');
+        var idx=parseInt(prompt('Choisissez un livret :\n'+names,1),10)-1;
+        if(isNaN(idx)||idx<0||idx>=items.length) return;
+        chosen=items[idx];
+      }
+      spDownload(chosen);
+    }).catch(function(e){ toast('Erreur liste : '+e.message,'err'); });
+}
+
+function spDownload(item){
+  var cfg=spGetCfg();
+  var parsed=spParseUrl(cfg.folderUrl||'');
+  var dlUrl;
+  if(!parsed||!parsed.owner){
+    dlUrl='https://graph.microsoft.com/v1.0/me/drive/items/'+item.id+'/content';
+  } else {
+    dlUrl='https://graph.microsoft.com/v1.0/users/'+encodeURIComponent(parsed.owner)+'/drive/items/'+item.id+'/content';
+  }
+  fetch(dlUrl,{headers:{Authorization:'Bearer '+_spToken}})
+    .then(function(r){return r.json();})
+    .then(function(st){
+      if(!st){ toast('Fichier vide.','err'); return; }
+      var name=st.stagiaire||'?';
+      if(!confirm('Charger le livret de \u00ab '+name+' \u00bb ?')) return;
+      applyState(st); initAllSigs();
+      var ms=document.getElementById('modal_stag'); if(ms) ms.value=name;
+      closeModal();
+      toast('Livret de '+name+' charge depuis OneDrive.','ok');
+    }).catch(function(e){ toast('Erreur telechargement : '+e.message,'err'); });
+}
+
+function triggerImport(){ document.getElementById('fileInput').click(); }
+
+function loadFromJSON(evt){
+  var file=evt.target.files[0]; if(!file)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    try{
+      var st=JSON.parse(e.target.result);
+      var name=st.stagiaire||'Stagiaire';
+      if(!confirm('Charger le livret de « '+name+' » ?')) return;
+      applyState(st); initAllSigs();
+      var ms=document.getElementById('modal_stag'); if(ms) ms.value=name;
+      closeModal();
+      toast('📂 Livret de '+name+' restauré.','ok');
+    }catch(err){ toast('❌ Erreur : '+err.message,'err'); }
+  };
+  r.readAsText(file,'UTF-8');
+  evt.target.value='';
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+function openModal(){
+  var modal=document.getElementById('saveModal');
+  if(modal) modal.classList.add('open');
+  var ms=document.getElementById('modal_stag'); if(ms) ms.value=getStagName();
+  refreshSaveList();
+  spUpdateAccountBar();
+}
+function closeModal(){
+  var modal=document.getElementById('saveModal');
+  if(modal) modal.classList.remove('open');
+}
+
+/* ============================================================
+   IMPRESSION
+   ============================================================ */
+function printTab(n){
+  document.body.classList.add('print-single');
+  document.querySelectorAll('.section').forEach(function(s,i){
+    s.classList.toggle('print-target',i===n);
+  });
+  window.print();
+  document.body.classList.remove('print-single');
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('print-target'); });
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+function resetAll(){
+  if(!confirm('Réinitialiser toutes les données ?\nCette action est irréversible.')) return;
+  BILAN_COMPS.forEach(function(c){ RB[c.id]=null; NRB[c.id]=false; });
+  DETAIL_COMPS.forEach(function(c){ RD[c.id]={stag:null,form:null}; NRD[c.id]=false; });
+  ENGINS.forEach(function(e){ RE[e.id]=false; });
+  PARCOURS_SEANCES.forEach(function(s){ RP[s.id]={date:'',obs:''}; });
+  JU='';
+  ['prenom','nom','mat','aff','nomstage','deb','fin'].forEach(function(k){ var el=document.getElementById('f_'+k); if(el) el.value=''; });
+  document.getElementById('f_resp').value='BERNARD-BRET Philippe';
+  ['t_prenom','t_nom','t_mat','t_aff'].forEach(function(k){ var el=document.getElementById(k); if(el) el.value=''; });
+  ['obs_bilan','obs_axe','obs_plan','obs_resultat','j_obs'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  clearPhoto(); _sigs={};
+  ['resp','app'].forEach(clearSig);
+  buildBilan(); buildDetail(); buildEngins();
+  pickJury('_NONE_'); JU='';
+  updateBilanGrise();
+  goTab(0);
+  toast('🗑️ Livret réinitialisé.','ok');
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function(){
+  buildBilan();
+  buildDetail();
+  buildEngins();
+  initAllSigs();
+  spHandleCallback();
+  spUpdateAccountBar();
+  /* Auto-update header name */
+  ['f_prenom','f_nom'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('input',function(){
+      var name=getStagName().trim();
+      var hdrName=document.getElementById('hdr_name');
+      if(hdrName) hdrName.textContent=name||'N° stage : 26/COD CSO complémentaire 4.5t /GFOR/';
+    });
+  });
+  /* Restore last save */
+  try{
+    var lastKey=localStorage.getItem(LS_KEY+'_last');
+    if(lastKey){
+      var st=JSON.parse(localStorage.getItem(lastKey));
+      if(st){ applyState(st); initAllSigs(); toast('📂 Livret restauré : '+(st.stagiaire||''),'ok'); }
+    }
+  }catch(e){}
+});
+</script>
+</body>
+</html>
