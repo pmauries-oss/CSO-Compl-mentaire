@@ -1,115 +1,390 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index des Outils - SDIS 38</title>
-    <style>
-        :root {
-            --bg: #0d0f14;
-            --surface: #161a22;
-            --border: #2a3040;
-            --orange: #ff6b1a;
-            --text: #e8eaf0;
-            --text-dim: #7a8099;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSO Complémentaire 4,5t – SDIS 38</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+:root {
+  --rouge:    #cc0000;
+  --rouge-dk: #8b0000;
+  --rouge-lt: #ff3333;
+  --noir:     #0f0f0f;
+  --gris-dk:  #1a1a1a;
+  --gris:     #2a2a2a;
+  --gris-lt:  #3d3d3d;
+  --blanc:    #f5f0eb;
+  --or:       #c8a84b;
+}
 
-        .container {
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .logo-badge {
-            background: var(--orange);
-            color: #fff;
-            font-weight: bold;
-            display: inline-block;
-            padding: 6px 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--noir);
+  color: var(--blanc);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
+/* ── FOND ANIMÉ ── */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(204,0,0,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204,0,0,.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: drift 30s linear infinite;
+}
+@keyframes drift { from { background-position: 0 0; } to { background-position: 60px 60px; } }
 
-        p {
-            color: var(--text-dim);
-            margin-bottom: 30px;
-        }
+.bg-glow {
+  position: fixed; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(139,0,0,.35) 0%, transparent 70%);
+  pointer-events: none;
+}
 
-        .link-card {
-            background: #1e2330;
-            border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: transform 0.2s, border-color 0.2s;
-        }
+/* ── WRAPPER ── */
+.page {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 20px 60px;
+}
 
-        .link-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--orange);
-        }
+/* ── HEADER ── */
+header {
+  width: 100%; max-width: 860px;
+  display: flex; align-items: center; gap: 20px;
+  padding: 32px 0 0;
+  animation: slideDown .7s ease both;
+}
+@keyframes slideDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 
-        .icon {
-            font-size: 30px;
-        }
+.sdis-badge {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: var(--rouge);
+  border: 3px solid var(--rouge-lt);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px; font-weight: 700; color: #fff; line-height: 1.2;
+  box-shadow: 0 0 24px rgba(204,0,0,.5), 0 0 60px rgba(204,0,0,.2);
+  flex-shrink: 0;
+}
 
-        .details {
-            text-align: left;
-        }
+.header-text { flex: 1; }
+.header-sup {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--rouge-lt); margin-bottom: 4px;
+}
+.header-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px; font-weight: 700; color: #fff; line-height: 1.1;
+}
+.header-sub {
+  font-size: 12px; color: rgba(245,240,235,.45); margin-top: 4px; letter-spacing: .5px;
+}
 
-        .details span {
-            display: block;
-            font-weight: bold;
-            font-size: 16px;
-        }
+/* ── SÉPARATEUR ── */
+.divider {
+  width: 100%; max-width: 860px;
+  height: 1px; margin: 24px 0;
+  background: linear-gradient(90deg, transparent, var(--rouge), transparent);
+  animation: slideDown .8s .1s ease both; opacity: 0;
+  animation-fill-mode: both;
+}
 
-        .details small {
-            color: var(--text-dim);
-            font-size: 12px;
-        }
-    </style>
+/* ── HERO ── */
+.hero {
+  width: 100%; max-width: 860px;
+  text-align: center;
+  padding: 24px 0 36px;
+  animation: fadeUp .8s .2s ease both;
+}
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+.hero-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--or); margin-bottom: 14px;
+}
+.hero-h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 700; line-height: 1;
+  color: #fff;
+  text-shadow: 0 0 40px rgba(204,0,0,.4);
+}
+.hero-h1 span { color: var(--rouge-lt); }
+.hero-desc {
+  max-width: 520px; margin: 18px auto 0;
+  font-size: 15px; font-weight: 300; color: rgba(245,240,235,.6);
+  line-height: 1.65;
+}
+
+/* ── BADGE STAGE ── */
+.stage-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 22px;
+  padding: 8px 18px;
+  border: 1px solid rgba(200,168,75,.35);
+  border-radius: 40px;
+  background: rgba(200,168,75,.08);
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--or);
+}
+.stage-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--or); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(.6);} }
+
+/* ── CARTE PRINCIPALE ── */
+.cards-area {
+  width: 100%; max-width: 860px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  animation: fadeUp .8s .35s ease both;
+}
+
+.card-main {
+  grid-column: 1 / -1;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--gris-dk) 0%, #1e0000 100%);
+  border: 1px solid rgba(204,0,0,.4);
+  border-radius: 16px;
+  padding: 36px 40px;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  text-decoration: none; display: block;
+}
+.card-main:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(204,0,0,.35), 0 0 0 1px rgba(204,0,0,.6);
+  border-color: var(--rouge);
+}
+.card-main::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 100% 50%, rgba(204,0,0,.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cm-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--rouge-lt); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cm-label::before { content:''; width:24px; height:2px; background:var(--rouge-lt); border-radius:2px; }
+
+.cm-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.1;
+}
+.cm-desc {
+  font-size: 14px; font-weight: 300; color: rgba(245,240,235,.55);
+  max-width: 480px; line-height: 1.6; margin-bottom: 26px;
+}
+
+.cm-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--rouge);
+  color: #fff; font-family: 'Oswald', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 28px; border-radius: 10px;
+  transition: background .2s, transform .15s;
+  text-decoration: none;
+}
+.cm-cta:hover { background: var(--rouge-lt); transform: scale(1.03); }
+.cm-cta svg { width:18px; height:18px; flex-shrink:0; }
+
+.cm-onglets {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 6px; pointer-events: none;
+}
+.cm-ong {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: rgba(245,240,235,.4);
+  padding: 5px 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px; background: rgba(255,255,255,.04);
+}
+.cm-ong-num {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(204,0,0,.5); color: #fff;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+/* ── CARTES INFO ── */
+.card-info {
+  background: var(--gris-dk);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px; padding: 24px;
+  transition: border-color .2s, background .2s;
+}
+.card-info:hover {
+  border-color: rgba(204,0,0,.3);
+  background: rgba(26,0,0,.5);
+}
+.ci-icon { font-size: 26px; margin-bottom: 10px; }
+.ci-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 6px;
+}
+.ci-desc { font-size: 12px; color: rgba(245,240,235,.45); line-height: 1.55; }
+
+/* ── TAGS COMPÉTENCES ── */
+.tags {
+  width: 100%; max-width: 860px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+  margin-top: 8px;
+  animation: fadeUp .8s .5s ease both;
+}
+.tag {
+  font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px; border: 1px solid;
+}
+.tag-bleu   { color: #64b5f6; border-color: rgba(100,181,246,.25); background: rgba(100,181,246,.07); }
+.tag-orange { color: #ffb74d; border-color: rgba(255,183,77,.25);  background: rgba(255,183,77,.07); }
+.tag-rouge  { color: #ef9a9a; border-color: rgba(239,154,154,.25); background: rgba(239,154,154,.07); }
+.tag-vert   { color: #a5d6a7; border-color: rgba(165,214,167,.25); background: rgba(165,214,167,.07); }
+
+/* ── FOOTER ── */
+footer {
+  width: 100%; max-width: 860px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  animation: fadeUp .8s .6s ease both;
+}
+.foot-l { font-size: 11px; color: rgba(245,240,235,.3); }
+.foot-r { font-size: 11px; color: var(--rouge-lt); font-weight: 600; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .cards-area { grid-template-columns: 1fr; }
+  .cm-onglets { display: none; }
+  .card-main { padding: 26px 22px; }
+  header { padding: 22px 0 0; }
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-    <div class="logo-badge">SDIS 38</div>
-    <h1>Portail de Gestion</h1>
-    <p>Sélectionnez l'outil que vous souhaitez utiliser ci-dessous.</p>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
 
-    <a href="livret_CSO_complementaire_4t5.html" class="link-card">
-        <div class="icon">🚒</div>
-        <div class="details">
-            <span>Complémentaire CSO</span>
-            <small>Conducteur de plus de 3,5 tonnes</small>
-        </div>
+<div class="page">
+
+  <header>
+    <div class="sdis-badge">SDIS<br>38</div>
+    <div class="header-text">
+      <div class="header-sup">Groupement Formation — GFOR</div>
+      <div class="header-title">Formation COD · Conduite en situation opérationnelle</div>
+      <div class="header-sub">N° stage : 26/COD CSO complémentaire 4.5t /GFOR/</div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Livret numérique de formation</div>
+    <h1 class="hero-h1">CSO <span>Complémentaire</span><br>4,5 tonnes</h1>
+    <p class="hero-desc">
+      Livret d'évaluation et de suivi pour la formation complémentaire
+      conducteur VSAV et véhicules de plus de 3,5 t.
+    </p>
+    <div class="stage-badge">
+      <div class="stage-dot"></div>
+      Disponible en ligne · SDIS 38
+    </div>
+  </div>
+
+  <div class="cards-area">
+
+    <!-- CARTE PRINCIPALE LIVRET -->
+    <a class="card-main" href="livret_CSO_complementaire_4t5.html" target="_blank">
+      <div class="cm-label">Accès direct</div>
+      <div class="cm-title">Livret stagiaire<br>CSO 4,5t</div>
+      <div class="cm-desc">
+        Ouvrir le livret interactif complet : identité, bilan de compétences,
+        synthèse détaillée, parcours tutoré et jury.
+      </div>
+      <span class="cm-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <line x1="9" y1="15" x2="15" y2="15"/>
+        </svg>
+        Ouvrir le livret
+      </span>
+
+      <div class="cm-onglets">
+        <div class="cm-ong"><div class="cm-ong-num">0</div>Identité</div>
+        <div class="cm-ong"><div class="cm-ong-num">1</div>Bilan CSO</div>
+        <div class="cm-ong"><div class="cm-ong-num">2</div>Synthèse détaillée</div>
+        <div class="cm-ong"><div class="cm-ong-num">3</div>Parcours tutoré</div>
+        <div class="cm-ong"><div class="cm-ong-num">4</div>Jury &amp; Visas</div>
+      </div>
     </a>
-</div>
 
+    <!-- CARTE COMPÉTENCES -->
+    <div class="card-info">
+      <div class="ci-icon">📊</div>
+      <div class="ci-title">25 compétences évaluées</div>
+      <div class="ci-desc">
+        6 critères officiels au bilan CSO + 19 compétences détaillées
+        réparties en Comportement, Technique et Sécurité.
+      </div>
+    </div>
+
+    <!-- CARTE SAUVEGARDE -->
+    <div class="card-info">
+      <div class="ci-icon">☁️</div>
+      <div class="ci-title">Sauvegarde OneDrive</div>
+      <div class="ci-desc">
+        Enregistrement local (navigateur), synchronisation OneDrive / SharePoint SDIS 38
+        et export / import manuel en fichier .json.
+      </div>
+    </div>
+
+    <!-- CARTE PARCOURS -->
+    <div class="card-info">
+      <div class="ci-icon">🚒</div>
+      <div class="ci-title">Parcours tutoré</div>
+      <div class="ci-desc">
+        5 séances de conduite + guidage + validation. Suivi sur VSAV, VSAV HR,
+        VSAV HR 4T5 et VTUE.
+      </div>
+    </div>
+
+    <!-- CARTE JURY -->
+    <div class="card-info">
+      <div class="ci-icon">⚖️</div>
+      <div class="ci-title">Décision du jury</div>
+      <div class="ci-desc">
+        Synthèse automatique, détection des insuffisances, signatures numériques
+        et décision : Validé · Ajourné (tutorat) · Ajourné (refaire J1/J3).
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAGS -->
+  <div class="tags">
+    <span class="tag tag-bleu">🧠 Comportement · 4 critères</span>
+    <span class="tag tag-orange">⚙️ Technique · 11 critères</span>
+    <span class="tag tag-rouge">🛡️ Sécurité · 4 critères</span>
+    <span class="tag tag-vert">✅ Jury · 3 décisions possibles</span>
+  </div>
+
+  <footer>
+    <span class="foot-l">SDIS 38 — Service Départemental d'Incendie et de Secours de l'Isère</span>
+    <span class="foot-r">Groupement Formation · GFOR</span>
+  </footer>
+
+</div>
 </body>
 </html>
